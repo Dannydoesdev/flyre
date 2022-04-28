@@ -3,7 +3,8 @@
 <p>Sup sup sup</p>
 
 <section>
+    <h2>Featured artists:</h2>
     {% for result in results %}
-    <h3>{{result[2]}}</h3>
+    <a class="arist_links" href="/artist?id={{ result[0] }}">{{ result[2] }}</a><br><br>
     {% endfor %}
 </section>

@@ -31,6 +31,17 @@ def index():
 
     return render_template('index.html', results=results)
 
+@app.route('/artist', methods=['GET'])
+def artist():
+    id = request.args.get('id')
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM USERS WHERE user_id = %s', [id])
+    response = cur.fetchall()
+    results = response[0]
+    print(results)
+    return render_template('artist.html', results=results) 
+
     # conn = psycopg2.connect(DATABASE_URL)
     # cur =  conn.cursor()
     # cur.execute('SELECT 1', [])
