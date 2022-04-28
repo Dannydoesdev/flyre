@@ -1,2 +1,5 @@
 # flyre
-GA Project 2
+
+##FLYRE app
+
+###General Assembly Project 2
