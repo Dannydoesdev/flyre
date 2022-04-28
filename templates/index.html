@@ -1,3 +1,8 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
 <h1>Flyre</h1>
 
 <p>Sup sup sup</p>
@@ -8,3 +13,5 @@
     <a class="arist_links" href="/artist?id={{ result[0] }}">{{ result[2] }}</a><br><br>
     {% endfor %}
 </section>
+
+{% endblock %}

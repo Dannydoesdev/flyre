@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <h1>Artist name: {{ results[2] }}</h1>
 
 <p>Location: {{ results[3] }}</p>
@@ -8,3 +12,5 @@
 <a href="{{ results[6] }}">Soundcloud Link</a>
 <a href="{{ results[7] }}">Facebook Link</a>
 <p>Email: {{ results[8]  }}</p>
+
+{% endblock %}
