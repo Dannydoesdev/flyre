@@ -4,6 +4,13 @@
 
 <h1>Artist name: {{ results[2] }}</h1>
 
+<h2>Genres:</h2>
+<div class="genre_div">
+{% for genre in genres %}
+<h3 class="genre_list">{{ genre[0] }}</h3>
+{% endfor %}
+</div>
+
 <p>Location: {{ results[3] }}</p>
 <p>Bio: {{ results[4] }}</p>
 

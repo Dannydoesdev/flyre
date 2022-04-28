@@ -39,8 +39,16 @@ def artist():
     cur.execute('SELECT * FROM USERS WHERE user_id = %s', [id])
     response = cur.fetchall()
     results = response[0]
-    print(results)
-    return render_template('artist.html', results=results) 
+
+    cur.execute('SELECT genre_name FROM genres WHERE user_id = %s', [id])
+    genres = cur.fetchall()
+    # print(genre_response)
+    # genres = genre_response[0]
+    print(genres)
+    for genre in genres:
+        print(genre)
+
+    return render_template('artist.html', results=results, genres=genres) 
 
     # conn = psycopg2.connect(DATABASE_URL)
     # cur =  conn.cursor()

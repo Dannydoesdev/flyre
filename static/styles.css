@@ -3,3 +3,9 @@ body {
     background-color: black;
     text-align: center;
 }
+
+.genre_div {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
