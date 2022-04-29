@@ -146,10 +146,42 @@ def register_action():
  
     return redirect('/')
 
-
 @app.route('/register')
 def register():
     return render_template('register.html', name=session.get('name'))
+
+@app.route('/complete_profile_action', methods=['POST'])
+def complete_profile_action():
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    location = request.form.get('location')
+    bio = request.form.get('bio')
+    profile_photo_url = request.form.get('profile_photo_url')
+    soundcloud_url = request.form.get('soundcloud_url')
+    facebook_url = request.form.get('facebook_url')
+    user_type = request.form.get('user_type')
+    # cur.execute('SELECT * from users WHERE email = %s', [email])
+    # email_check = cur.fetchall()
+    id = session.get('id')
+
+    cur.execute('UPDATE users SET(location, bio, profile_photo_url, soundcloud_url, facebook_url, user_type) = (%s, %s, %s, %s, %s, %s) WHERE user_id = %s', (location, bio, profile_photo_url, soundcloud_url, facebook_url, user_type, id))
+
+    # session['name'] = name
+    # session['email'] = email
+    
+    conn.commit()
+
+    # cur.execute('SELECT user_id from users where email = %s', [email])
+    # response = cur.fetchone()
+    # print('testing result')
+    conn.close()
+ 
+    return redirect('/')
+
+@app.route('/complete_profile')
+def complete_profile():
+    return render_template('complete_profile.html', name=session.get('name'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
