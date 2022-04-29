@@ -16,11 +16,16 @@
 
 {% block heading %}
 {% if username %}
+
+
+<a href="/">Home</a>
+<a href="/artist">Your Page</a>
 <h1>Welcome to Flyre {{ username }}</h1>
 <a href="/logout">Log Out</a>
 
 {% else %}
 
+<a href="/">Home</a>
 <h2>Welcome to Flyre</h2>
 <a href="/login">Log-in here</a>
 <a href="/register">Create an account</a>

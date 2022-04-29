@@ -2,6 +2,12 @@
 
 {% block content %}
 
+{% if current_user %}
+
+<h1>Welcome to your page</h1>
+
+{% endif %}
+
 <h1>Artist name: {{ results[2] }}</h1>
 
 <h2>Genres:</h2>
@@ -14,10 +20,10 @@
 <p>Location: {{ results[3] }}</p>
 <p>Bio: {{ results[4] }}</p>
 
-<img src="{{ results[5] }}">
+<img src="{{ results[6] }}">
 
-<a href="{{ results[6] }}">Soundcloud Link</a>
-<a href="{{ results[7] }}">Facebook Link</a>
-<p>Email: {{ results[8]  }}</p>
+<a href="{{ results[7] }}">Soundcloud Link</a>
+<a href="{{ results[8] }}">Facebook Link</a>
+<p>Email: {{ results[5] }}</p>
 
 {% endblock %}

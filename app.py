@@ -25,7 +25,23 @@ def index():
 
 @app.route('/artist', methods=['GET'])
 def artist():
+    # if session.get('id'):
+    #     id = session.get('id')
+    # else:
     id = request.args.get('id')
+
+    if session.get('id') == int(request.args.get('id')):
+        current_user = session.get('name')
+    else:
+        current_user = False
+        print('not current user')
+    # cookie = session.get('id')
+    # arg = request.args.get('id')
+    # print(cookie)
+    # print(arg)
+    # print(type(cookie))
+    # print(type(arg))
+
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
     cur.execute('SELECT * FROM USERS WHERE user_id = %s', [id])
@@ -40,7 +56,7 @@ def artist():
     for genre in genres:
         print(genre)
 
-    return render_template('artist.html', results=results, genres=genres) 
+    return render_template('artist.html', results=results, genres=genres, current_user=current_user) 
 
 @app.route('/login')
 def login():
@@ -101,12 +117,20 @@ def register_action():
         hash_pass = bcrypt.hashpw(f'{password}'.encode(), bcrypt.gensalt()).decode()
         print(hash_pass)
         cur.execute('INSERT INTO users (hashed_password, email, name) VALUES (%s, %s, %s)', (hash_pass, email, name))
+
         session['name'] = name
+        session['email'] = email
+        
         conn.commit()
+
+        cur.execute('SELECT user_id from users where email = %s', [email])
+        response = cur.fetchone()
+        id = response[0]
+        print(id)
+        print('testing result')
+        session['id'] = id
         conn.close()
-    
-    
-   
+ 
     return redirect('/')
 
 
