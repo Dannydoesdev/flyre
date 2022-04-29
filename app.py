@@ -84,5 +84,35 @@ def logout():
     return redirect('/')
 
 
+@app.route('/register_action', methods=['POST'])
+def register_action():
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    email = request.form.get('email')
+    password = request.form.get('password')
+    name = request.form.get('name')
+    cur.execute('SELECT * from users WHERE email = %s', [email])
+    email_check = cur.fetchall()
+
+    if email_check:
+        print('email already exists')
+    else:
+        print('email does not exist')
+        hash_pass = bcrypt.hashpw(f'{password}'.encode(), bcrypt.gensalt()).decode()
+        print(hash_pass)
+        cur.execute('INSERT INTO users (hashed_password, email, name) VALUES (%s, %s, %s)', (hash_pass, email, name))
+        session['name'] = name
+        conn.commit()
+        conn.close()
+    
+    
+   
+    return redirect('/')
+
+
+@app.route('/register')
+def register():
+    return render_template('register.html', name=session.get('name'))
+
 if __name__ == '__main__':
     app.run(debug=True)

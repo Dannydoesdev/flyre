@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Register for Flyre</h1>
+<div>
+    <form action="/register_action" method="POST">
+        Email: <input type="text" name="email" required><br><br>
+        Password: <input type="password" name="password" required><br><br>
+        Name/artist name: <input type="text" name="name" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+{% endblock %}
