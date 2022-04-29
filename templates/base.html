@@ -13,8 +13,25 @@
 {% endblock %}
 
 
+
+{% block heading %}
+{% if username %}
+<h1>Welcome to Flyre {{ username }}</h1>
+<a href="/logout">Log Out</a>
+
+{% else %}
+
+<h2>Welcome to Flyre</h2>
+<a href="/login">Log-in here</a>
+
+{% endif %}
+
+{% endblock %}
+
+
 {% block content %}
 {% endblock %}
+
 
 {% block footer %}
 <br><br><br>

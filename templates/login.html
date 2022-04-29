@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Log in to Flyre</h1>
+<div>
+    <form action="/login_action" method="POST">
+        Email: <input type="text" name="email"><br><br>
+        Password: <input type="password" name="password"><br><br>
+        <input type="submit" value="Log in">
+    </form>
+</div>
+{% endblock %}

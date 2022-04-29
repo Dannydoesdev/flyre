@@ -9,3 +9,8 @@ body {
     justify-content: center;
     gap: 50px;
 }
+
+a {
+    color: whitesmoke;
+    box-shadow: rgba(255, 0, 0, 0.573) 5px 5px 5px;
+}

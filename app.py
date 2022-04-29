@@ -10,8 +10,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'pretend secret key for testing')
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
 
-
-
 @app.route('/')
 def index():
     conn = psycopg2.connect(DATABASE_URL)
@@ -20,16 +18,10 @@ def index():
     results = cur.fetchall()
     print(results)
     # email = session.get('email')
-    # name = session.get('name')
-    # id = session.get('id')
-    # if email:
-    #     print(email)
-    # if name:
-    #     print(name)
-    # if id:
-    #     print(id)
+    name = session.get('name')
+    id = session.get('id')
 
-    return render_template('index.html', results=results)
+    return render_template('index.html', results=results, name=name, id=id, username=session.get('name'))
 
 @app.route('/artist', methods=['GET'])
 def artist():
@@ -50,12 +42,47 @@ def artist():
 
     return render_template('artist.html', results=results, genres=genres) 
 
-    # conn = psycopg2.connect(DATABASE_URL)
-    # cur =  conn.cursor()
-    # cur.execute('SELECT 1', [])
-    # conn.close()
-    
-    # return 'Hello World!'
+@app.route('/login')
+def login():
+    return render_template('login.html', name=session.get('name'))
+
+@app.route('/login_action', methods=['POST'])
+def login_action():
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    cur.execute('SELECT name, email, hashed_password from users')
+    user_emails = cur.fetchall()
+    print(user_emails)
+    email = request.form.get('email')
+    print(email)
+    password = request.form.get('password')
+    for item in user_emails:
+        if email in item:
+            print('email found!')
+            cur.execute('SELECT name, user_id, hashed_password from users where email = %s', [email])
+            response = cur.fetchone()
+            name = response[0]
+            print(name)
+            id = response[1]
+            print(id)
+            password_hash = response[2]
+            valid = bcrypt.checkpw(password.encode(), password_hash.encode())
+            if valid:
+                print('password correct!!')
+                session['email'] = email
+                session['name'] = name
+                session['id'] = id
+
+        else:
+            print('email not found')
+   
+    return redirect('/')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
