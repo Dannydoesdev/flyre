@@ -29,18 +29,31 @@ def artist():
     #     id = session.get('id')
     # else:
     id = request.args.get('id')
+    cookie = session.get('id')
+    arg = request.args.get('id')
 
-    if session.get('id') == int(request.args.get('id')):
-        current_user = session.get('name')
-    else:
-        current_user = False
-        print('not current user')
+    if str(cookie) == arg:
+        current_user = True
+
+    # print(type(cookie))
+    # print(type(arg))
+    # argint = int(arg)
+    # print(argint)
+    # print(type(argint))
+    # if cookie == int(arg):
+    #     current_user = session.get('name')
+    # else:
+    #     current_user = False
+    #     print('not current user')
     # cookie = session.get('id')
     # arg = request.args.get('id')
     # print(cookie)
     # print(arg)
-    # print(type(cookie))
-    # print(type(arg))
+    if str(session.get('id')) == request.args.get('id'):
+        current_user = 'yep'
+    else:
+        current_user = 'not'
+
 
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()

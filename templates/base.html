@@ -15,20 +15,27 @@
 
 
 {% block heading %}
-{% if username %}
+{% if session.get('name') %}
 
-
+<nav>
 <a href="/">Home</a>
-<a href="/artist">Your Page</a>
+<a href="/artist?id={{ session.get('id') }}">Your Page</a>
+<a href="/logout">Logout</a>
+</nav>
+
 <h1>Welcome to Flyre {{ username }}</h1>
-<a href="/logout">Log Out</a>
+
 
 {% else %}
 
+<nav>
 <a href="/">Home</a>
+<a href="/login">Login</a>
+<a href="/register">Register</a>
+</nav>
+
 <h2>Welcome to Flyre</h2>
-<a href="/login">Log-in here</a>
-<a href="/register">Create an account</a>
+
 
 {% endif %}
 

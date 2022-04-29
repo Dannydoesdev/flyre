@@ -1,5 +1,5 @@
 body {
-    color: white;
+    color: white; 
     background-color: black;
     text-align: center;
 }
@@ -13,4 +13,10 @@ body {
 a {
     color: whitesmoke;
     box-shadow: rgba(255, 0, 0, 0.573) 5px 5px 5px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
 }
