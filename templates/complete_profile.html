@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <h1>Complete your profile</h1>
 <div>
     <form action="/complete_profile_action" method="POST">
@@ -13,11 +14,5 @@
         <input type="submit" value="Submit">
     </form>
 </div>
-{% endblock %}
 
-location TEXT,
-    bio TEXT,
-    profile_photo_url TEXT,
-    soundcloud_url TEXT,
-    facebook_url TEXT,
-    user_type TEXT
+{% endblock %}

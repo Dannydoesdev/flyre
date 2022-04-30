@@ -5,11 +5,14 @@
 {% if current_user == 'yep' %}
 
 <h1>Welcome to your page</h1>
-<a href="/complete_profile">Complete profile</a>
+<a href="/complete_profile">Complete profile</a><br>
+<a href="/add_soundcloud">Add a track from Soundcloud</a>
 
 {% endif %}
 
 <h1>Artist name: {{ results[2] }}</h1>
+
+{% if genres %}
 
 <h2>Genres:</h2>
 <div class="genre_div">
@@ -17,6 +20,8 @@
 <h3 class="genre_list">{{ genre[0] }}</h3>
 {% endfor %}
 </div>
+
+{% endif %}
 
 <p>Location: {{ results[3] }}</p>
 <p>Bio: {{ results[4] }}</p>
@@ -27,6 +32,20 @@
 <a href="{{ results[8] }}">Facebook Link</a>
 <p>Email: {{ results[5] }}</p>
 
-<iframe id="track" width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/249593158&amp;color=000000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false"></iframe>
+{# <iframe id="track" width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/249593158&amp;color=000000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false"></iframe> #}
+
+{% if iframe %}
+
+{{ iframe|safe }}<br><br>
+
+{% endif %}
+
+{% if iframe_list %}
+
+{% for item in iframe_list %}
+{{ item|safe }}<br><br>
+{% endfor %}
+
+{% endif %}
 
 {% endblock %}

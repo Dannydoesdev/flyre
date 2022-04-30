@@ -2,7 +2,9 @@ import psycopg2
 import os
 import bcrypt
 
-from flask import Flask, request, redirect, render_template, session
+from scapi import get_track
+
+from flask import Flask, request, redirect, render_template, session, jsonify
 
 DATABASE_URL = os.environ.get('DATABASE_URL', 'dbname=flyre')
 SECRET_KEY = os.environ.get('SECRET_KEY', 'pretend secret key for testing')
@@ -10,13 +12,14 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'pretend secret key for testing')
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
 
+
 @app.route('/')
 def index():
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
     cur.execute('SELECT * from USERS')
     results = cur.fetchall()
-    print(results)
+    # print(results)
     # email = session.get('email')
     name = session.get('name')
     id = session.get('id')
@@ -25,6 +28,8 @@ def index():
 
 @app.route('/artist', methods=['GET'])
 def artist():
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
     # if session.get('id'):
     #     id = session.get('id')
     # else:
@@ -35,6 +40,48 @@ def artist():
     if str(cookie) == arg:
         current_user = True
 
+    # iframe = get_track('https://soundcloud.com/suzuki-growhouse/lcd-warhols')
+
+
+    cur.execute('SELECT track_url from tracks where user_id = %s', [id])
+    response = cur.fetchall()
+    
+    track_response_list = []
+
+    if response:
+        print(response)
+        track_url = response[0]
+        for one_response in response:
+            print(one_response[0])
+            track_response_list.append(one_response[0])
+        # for index, track_url in enumerate(response):
+        #     print(index, track_url[0])
+        #     track_var = f'track{index}'
+        #     track_var = track_url[0]
+    else:
+        track_url = ''
+    # print('track0')
+    # print(track0)
+
+    print(track_response_list)
+
+    iframe_list = []
+
+    if track_url:
+        print(track_url)
+        iframe = get_track(track_url)
+        for url in track_response_list:
+            iframe_list.append(get_track(url))
+    else:
+        iframe = ''
+
+    print(iframe_list)
+    for item in iframe_list:
+        print(item)
+
+    # print(iframe)
+
+    # iframe_jsonify = jsonify(iframe)
     # print(type(cookie))
     # print(type(arg))
     # argint = int(arg)
@@ -55,8 +102,7 @@ def artist():
         current_user = 'not'
 
 
-    conn = psycopg2.connect(DATABASE_URL)
-    cur = conn.cursor()
+    
     cur.execute('SELECT * FROM USERS WHERE user_id = %s', [id])
     response = cur.fetchall()
     results = response[0]
@@ -69,7 +115,7 @@ def artist():
     for genre in genres:
         print(genre)
 
-    return render_template('artist.html', results=results, genres=genres, current_user=current_user) 
+    return render_template('artist.html', results=results, genres=genres, current_user=current_user, iframe=iframe, iframe_list=iframe_list) 
 
 @app.route('/login')
 def login():
@@ -149,6 +195,38 @@ def register_action():
 @app.route('/register')
 def register():
     return render_template('register.html', name=session.get('name'))
+
+
+@app.route('/add_soundcloud_action', methods=['POST'])
+def add_soundcloud_action():
+    id=session.get('id')
+    track_url = request.form.get('track_url')
+    sc_response = get_track(track_url)
+    if sc_response:
+        print('track found!')
+        print(sc_response)
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+        cur.execute('INSERT INTO tracks (track_url, user_id) VALUES (%s, %s)', (track_url, id))
+        conn.commit()
+
+        cur.execute('SELECT track_url from tracks where user_id = %s', [id])
+        response = cur.fetchone()
+        track_url = response[0]
+        print(id)
+        print('testing result')
+        conn.close()
+
+    else:
+
+        print('track not found!')
+
+    return redirect('/')
+
+
+@app.route('/add_soundcloud')
+def add_soundcloud():
+    return render_template('add_soundcloud.html', name=session.get('name'))
 
 @app.route('/complete_profile_action', methods=['POST'])
 def complete_profile_action():

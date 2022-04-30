@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS genres;
+DROP TABLE IF EXISTS tracks;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
@@ -17,4 +18,10 @@ CREATE TABLE users (
 CREATE TABLE genres (
     user_id INTEGER REFERENCES users(user_id),
     genre_name TEXT NOT NULL
+);
+
+CREATE TABLE tracks (
+    user_id INTEGER REFERENCES users(user_id),
+    track_url TEXT NOT NULL,
+    track_priority INTEGER
 );
