@@ -20,3 +20,8 @@ nav {
     justify-content: center;
     gap: 80px;
 }
+
+iframe {
+    width: 40%;
+    color: #000000;
+}
