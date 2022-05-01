@@ -2,6 +2,7 @@ body {
     color: white; 
     background-color: black;
     text-align: center;
+    margin: 80px;
 }
 
 .genre_div {
@@ -23,6 +24,48 @@ nav {
 
 iframe {
     height: 200px;
-    width: 60%;
+    width: 80%;
     color: #000000;
+}
+
+#all_artist_info{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 2fr;
+}
+
+#artist_header {
+    /* background-image: url(https://cdn.pixabay.com/photo/2019/09/19/20/24/city-4490237_1280.jpg); */
+    background-image: url(https://cdn.pixabay.com/photo/2022/01/02/19/43/train-6910973_1280.jpg);
+    grid-column: 1 / span 2;
+    display: flex;
+    justify-content: start;
+    gap: 200px;
+    align-items: center;
+    margin: 40px 100px;
+    text-align: left;
+    color: white;
+    font-weight: 900;
+    font-size: 30px;
+    text-shadow: 0 0 8px black;
+}
+
+#artist_profile_photo{
+    width: 13%;
+    border: 1px solid white;
+    border-radius: 50%;
+    background: black;
+    margin-left: 50px;
+    display: inline-block;
+
+}
+/* 
+#artist_about h4{
+    margin-left: 50px;
+    text-align: left;
+} */
+
+#artist_music {
+    margin-left: 120px;
+    text-align: left;
 }

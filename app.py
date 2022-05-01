@@ -4,7 +4,7 @@ import bcrypt
 
 from scapi import get_track
 
-from flask import Flask, request, redirect, render_template, session, jsonify
+from flask import Flask, request, redirect, render_template, session
 
 DATABASE_URL = os.environ.get('DATABASE_URL', 'dbname=flyre')
 SECRET_KEY = os.environ.get('SECRET_KEY', 'pretend secret key for testing')

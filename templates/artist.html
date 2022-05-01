@@ -10,7 +10,17 @@
 
 {% endif %}
 
+<section id = 'all_artist_info'>
+
+<section id = 'artist_header'>
+
+<img id="artist_profile_photo" src="{{ results[6] }}">
+
+<div id="artist_header_info">
+
 <h1>Artist name: {{ results[2] }}</h1>
+
+<p>Location: {{ results[3] }}</p>
 
 {% if genres %}
 
@@ -23,32 +33,51 @@
 
 {% endif %}
 
-<p>Location: {{ results[3] }}</p>
-<p>Bio: {{ results[4] }}</p>
 
-<img src="{{ results[6] }}">
+
+</div>
+</section>
+
+
+<section id="artist_music">
+
+    <h4>Artist music</h4>
+
+    {#
+    {% if iframe %}
+    
+    {{ iframe|safe }}<br><br>
+    
+    {% endif %}
+    
+    #}
+    
+    {% if iframe_list %}
+    
+    {% for item in iframe_list %}
+    {{ item|safe }}<br><br>
+    {% endfor %}
+    
+    {% endif %}
+    
+    </section>
+
+<aside id = 'artist_about'>
+
+    <h4>About {{ results[2] }}</h4>
 
 <a href="{{ results[7] }}">Soundcloud Link</a>
 <a href="{{ results[8] }}">Facebook Link</a>
+<p>Bio: {{ results[4] }}</p>
+
 <p>Email: {{ results[5] }}</p>
+
+</aside>
 
 {# <iframe id="track" width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/249593158&amp;color=000000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false"></iframe> #}
 
-{#
-{% if iframe %}
 
-{{ iframe|safe }}<br><br>
 
-{% endif %}
-
-#}
-
-{% if iframe_list %}
-
-{% for item in iframe_list %}
-{{ item|safe }}<br><br>
-{% endfor %}
-
-{% endif %}
+</section>
 
 {% endblock %}
