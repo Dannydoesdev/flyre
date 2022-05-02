@@ -107,6 +107,24 @@ def artist():
     response = cur.fetchall()
     results = response[0]
 
+    cur.execute('SELECT * FROM USERS WHERE user_id = %s', [id])
+    response_one = cur.fetchone()
+    results_one = response[0]
+    user_id = results[1]
+    artist_name = results[2]
+    location = results[3]
+    profile_photo = results[6]
+    background_image = results[7]
+    soundcloud_url = results[8]
+    facebook_url = results[9]
+    bio = results[4]
+    email = results[5]
+
+    print(results_one)
+
+    print(f'bio{bio}')
+
+
     cur.execute('SELECT genre_name FROM genres WHERE user_id = %s', [id])
     genres = cur.fetchall()
     # print(genre_response)
