@@ -14,6 +14,8 @@ body {
     display: flex;
     justify-content: center;
     gap: 50px;
+    align-items: center;
+    font-size: 16pt;
 }
 
 a {
@@ -47,9 +49,9 @@ iframe {
     grid-column: 1 / span 2;
     display: flex;
     justify-content: start;
-    gap: 200px;
+    gap: 115px;
     align-items: center;
-    margin: 40px 100px;
+    margin: 10px 100px;
     text-align: left;
     color: white;
     font-weight: 900;
@@ -83,5 +85,14 @@ iframe {
     opacity: 0.3;
     position: absolute;
     width: 90%;
-    height: 300px;
+    height: 260px;
+}
+
+
+#artist_background_nophoto {
+    z-index: -1;
+    opacity: 0.3;
+    position: absolute;
+    width: 90%;
+    height: 180px;
 }

@@ -18,7 +18,9 @@ INSERT INTO tracks (user_id, track_url, track_description, track_priority) VALUE
 
 INSERT INTO tracks (user_id, track_url, track_description, track_priority) VALUES (2, 'https://soundcloud.com/suzuki-growhouse/lcd-warhols', 'A fun time for the whole family', 1);
 
-INSERT INTO tracks (user_id, track_url, track_description, track_priority) VALUES (3, 'https://soundcloud.com/suzuki-growhouse/lcd-warhols', 'Just vibes', 1);
+INSERT INTO tracks (user_id, track_url, track_description, track_priority) VALUES (3, 'https://soundcloud.com/barchef-1/monolink-live-from-his-berlin-studio', 'Just vibes', 1);
+
+
 
 
 -- INSERT INTO users (hashed_password, name, location, bio, email, profile_photo_url, soundcloud_url, facebook_url, artist) VALUES ()

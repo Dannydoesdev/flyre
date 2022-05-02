@@ -14,20 +14,31 @@
 
 <section id = 'artist_header'>
 
+    {% if results[7] %}
+
 <img id="artist_background_photo" src="{{ results[7] }}">
+{% else %}
+<img id="artist_background_nophoto" src="https://cdn.pixabay.com/photo/2015/08/28/11/27/space-911785_1280.jpg">
 
+{% endif %}
+
+{% if results[6] %}
 <img id="artist_profile_photo" src="{{ results[6] }}">
-
+{% endif %}
 <div id="artist_header_info">
 
 <h1>Artist name: {{ results[2] }}</h1>
 
+{% if results[3] %}
 <p>Location: {{ results[3] }}</p>
+{% else %}
+<p>Location: Not provided yet</p>
+{% endif %}
 
 {% if genres %}
 
-<h2>Genres:</h2>
 <div class="genre_div">
+<h2>Genres:</h2>
 {% for genre in genres %}
 <h3 class="genre_list">{{ genre[0] }}</h3>
 {% endfor %}
@@ -60,6 +71,10 @@
     {{ item|safe }}<br><br>
     {% endfor %}
     
+    {% else %}
+
+    <p>{{ results[2] }} hasn't uploaded any tracks yet</p>
+
     {% endif %}
     
     </section>
@@ -70,7 +85,12 @@
 
 <a href="{{ results[7] }}">Soundcloud Link</a>
 <a href="{{ results[8] }}">Facebook Link</a>
+
+{% if results[4] %}
 <p>Bio: {{ results[4] }}</p>
+{% else %}
+<p>Bio: Not provided yet</p>
+{% endif %}
 
 <p>Email: {{ results[5] }}</p>
 

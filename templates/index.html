@@ -3,9 +3,19 @@
 
 {% block content %}
 
-<h1>Flyre</h1>
+{% if session.get('name') %}
 
-<p>Sup sup sup</p>
+<h1>Welcome to Flyre {{ username }}</h1>
+<p> <a href="/complete_profile">Update your profile here here</a></p>
+<p><a href="/add_soundcloud">Add a track from Soundcloud</a></p><br>
+
+{% else %}
+<h1>Flyre</h1>
+<p>Connecting local talent with local events</p>
+
+
+{% endif %}
+
 
 <section>
     <h2>Featured artists:</h2>
