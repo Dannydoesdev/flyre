@@ -114,8 +114,6 @@ def artist():
     else:
         current_user = 'not'
 
-
-    
     cur.execute('SELECT * FROM USERS WHERE user_id = %s', [id])
     response = cur.fetchall()
     results = response[0]
@@ -293,6 +291,55 @@ def complete_profile_action():
 @app.route('/complete_profile')
 def complete_profile():
     return render_template('complete_profile.html', name=session.get('name'))
+
+
+@app.route('/add_genres_action', methods=['POST'])
+def add_genres_action():
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    chosen_genres = request.form.getlist('genres')
+    # bio = request.form.get('bio')
+    # profile_photo_url = request.form.get('profile_photo_url')
+    # soundcloud_url = request.form.get('soundcloud_url')
+    # facebook_url = request.form.get('facebook_url')
+    # user_type = request.form.get('user_type')
+    # cur.execute('SELECT * from users WHERE email = %s', [email])
+    # email_check = cur.fetchall()
+    id = session.get('id')
+
+    # print(checkboxresult)
+
+    # cur.execute('UPDATE users SET(location, bio, profile_photo_url, soundcloud_url, facebook_url, user_type) = (%s, %s, %s, %s, %s, %s) WHERE user_id = %s', (location, bio, profile_photo_url, soundcloud_url, facebook_url, user_type, id))
+
+    # session['name'] = name
+    # session['email'] = email
+    
+    genre_check = sql_fetch('SELECT genre_name FROM genres WHERE user_id = %s', [id])
+    existing_genre_list = [genre_check['genre_name'] for genre_check in genre_check]
+
+    # for genre in genre_check:
+    #     print(genre['genre_name'])
+
+    for genre in chosen_genres:
+        if genre not in existing_genre_list:
+            print('genre not found')
+            sql_write('INSERT INTO genres (user_id, genre_name) VALUES (%s, %s)', (id, genre))
+        else:
+            print('genre found')
+
+
+    conn.commit()
+
+    # cur.execute('SELECT user_id from users where email = %s', [email])
+    # response = cur.fetchone()
+    # print('testing result')
+    conn.close()
+ 
+    return redirect(f'/artist?id={id}')
+
+@app.route('/add_genres')
+def add_genres():
+    return render_template('add_genres.html', name=session.get('name'))
 
 
 if __name__ == '__main__':
