@@ -69,6 +69,7 @@ iframe {
     display: inline-block;
 
 }
+
 /* 
 #artist_about h4{
     margin-left: 50px;
@@ -90,7 +91,9 @@ iframe {
 
 /* 
     width: 100%;
-    margin-left: -140px; */
+    margin-left: -140px; 
+*/
+
 }
 
 
@@ -100,4 +103,16 @@ iframe {
     position: absolute;
     width: 90%;
     height: 180px;
+}
+
+.artist_list_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+
+}
+
+.artist_list_img {
+    width: 20%;
 }

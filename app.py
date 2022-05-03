@@ -2,6 +2,9 @@ import psycopg2
 import os
 import bcrypt
 
+from psycopg2.extras import RealDictCursor
+
+from functions import *
 from scapi import get_track
 
 from flask import Flask, request, redirect, render_template, session
@@ -11,7 +14,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'pretend secret key for testing')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
-
 
 @app.route('/')
 def index():
@@ -23,8 +25,24 @@ def index():
     # email = session.get('email')
     name = session.get('name')
     id = session.get('id')
-
+    
     return render_template('index.html', results=results, name=name, id=id, username=session.get('name'))
+# sql_fetch('SELECT * FROM food WHERE id = %s', [id])
+
+@app.route('/artist_list')
+def artist_list():
+    artist_list_response = sql_fetch('SELECT user_id, name, profile_photo_url FROM users')
+
+    # print(artist_list_response)
+    # artist_list = [item['name'] for item in artist_list_response]
+    # print(artist_list)
+
+    # for item in artist_list_response:
+    #     print(item[2])
+    #     artist_list = []
+    # print(artist_list)
+    return render_template('artist_list.html', name=session.get('name'), artist_list=artist_list, artist_list_response=artist_list_response)
+
 
 @app.route('/artist', methods=['GET'])
 def artist():
@@ -42,7 +60,6 @@ def artist():
 
     # iframe = get_track('https://soundcloud.com/suzuki-growhouse/lcd-warhols')
 
-
     cur.execute('SELECT track_url from tracks where user_id = %s', [id])
     response = cur.fetchall()
     
@@ -58,6 +75,7 @@ def artist():
         #     print(index, track_url[0])
         #     track_var = f'track{index}'
         #     track_var = track_url[0]
+
     else:
         track_url = ''
     # print('track0')
@@ -96,6 +114,7 @@ def artist():
     # arg = request.args.get('id')
     # print(cookie)
     # print(arg)
+
     if str(session.get('id')) == request.args.get('id'):
         current_user = 'yep'
     else:
@@ -134,6 +153,9 @@ def artist():
         print(genre)
 
     return render_template('artist.html', results=results, genres=genres, current_user=current_user, iframe=iframe, iframe_list=iframe_list) 
+
+
+
 
 @app.route('/login')
 def login():
