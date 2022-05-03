@@ -18,15 +18,20 @@ body {
     font-size: 16pt;
 }
 
+#artist_name_index {
+    font-weight: 300;
+}
+
 a {
     color: whitesmoke;
-    box-shadow: rgba(255, 0, 0, 0.573) 5px 5px 5px;
+    /* box-shadow: rgba(255, 0, 0, 0.573) 5px 5px 5px; */
 }
 
 nav {
     display: flex;
     justify-content: center;
     gap: 80px;
+    font-size: 16pt;
 }
 
 iframe {
@@ -34,6 +39,7 @@ iframe {
     width: 80%;
     color: #000000;
 }
+
 
 #all_artist_info{
     display: grid;
@@ -65,6 +71,16 @@ iframe {
     border: 1px solid white;
     border-radius: 50%;
     background: black;
+    margin-left: 50px;
+    display: inline-block;
+
+}
+
+#artist_profile_nophoto{
+    width: 13%;
+    border: 1px solid white;
+    border-radius: 50%;
+    background: white;
     margin-left: 50px;
     display: inline-block;
 
@@ -109,10 +125,30 @@ iframe {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 100px;
+    gap: 200px;
+    font-size: 18pt;
+    margin-top: 15px;
+}
 
+.artist_list_div h4 {
+    font-size: 3vmin;
 }
 
 .artist_list_img {
-    width: 20%;
+    width: 100%;
+}
+
+.artist_list_noimg {
+    width: 100%;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.artist_list_a {
+    width: 15%;
+}
+
+.artist_list_genres {
+    display: flex;
+    gap: 10px;
 }

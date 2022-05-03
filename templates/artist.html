@@ -22,9 +22,14 @@
 
 {% endif %}
 
+
 {% if results[6] %}
 <img id="artist_profile_photo" src="{{ results[6] }}">
+{% else %}
+<img id="artist_profile_nophoto" src="static/img/headphones-1.png">
+
 {% endif %}
+
 <div id="artist_header_info">
 
 <h1>Artist name: {{ results[2] }}</h1>

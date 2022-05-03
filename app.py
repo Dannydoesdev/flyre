@@ -33,15 +33,9 @@ def index():
 def artist_list():
     artist_list_response = sql_fetch('SELECT user_id, name, profile_photo_url FROM users')
 
-    # print(artist_list_response)
-    # artist_list = [item['name'] for item in artist_list_response]
-    # print(artist_list)
-
-    # for item in artist_list_response:
-    #     print(item[2])
-    #     artist_list = []
-    # print(artist_list)
-    return render_template('artist_list.html', name=session.get('name'), artist_list=artist_list, artist_list_response=artist_list_response)
+    genre_list_response = sql_fetch('SELECT * FROM genres')
+    print(genre_list_response)
+    return render_template('artist_list.html', name=session.get('name'), artist_list=artist_list, artist_list_response=artist_list_response, genre_list_response=genre_list_response)
 
 
 @app.route('/artist', methods=['GET'])
