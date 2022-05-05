@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div class="artist_list_all">
 
 {% for artist in artist_list_response %}
-
-<div class = 'artist_list_div'>
-   <a href = '/artist?id={{ artist.user_id }}'><h4>{{ artist.name }}</h4>
+<div class='artist_list_div'>
+<a class='artist_list_inner' href='/artist?id={{ artist.user_id }}'>
+    <div class="artist_list_name_genre">
+  <h4>{{ artist.name }}</h4>
     <div class = 'artist_list_genres'>
 
     {# Append genres of artist if the genres table matches users table user_id #}
@@ -17,17 +18,34 @@
         {% endif %}
     {% endfor %}
     </div>      
-   
+</div>
     {% if artist.profile_photo_url %}
-   <a class = 'artist_list_a' href = '/artist?id={{ artist.user_id }}'><img class = 'artist_list_img' src="{{ artist.profile_photo_url }}"></img></a>
+ <img class = 'artist_list_img' src="{{ artist.profile_photo_url }}"></img>
 
    {% else %}
-   <a class = 'artist_list_a' href = '/artist?id={{ artist.user_id }}'><img class = 'artist_list_noimg' src="static/img/headphones-1.png"></img></a>
+<img class = 'artist_list_noimg' src="static/img/headphones-1.png"></img>
 
    {% endif %}
 
+</a>
 </div>
-
 {% endfor %}
 
+</div>
+
 {% endblock %}
+
+
+
+
+
+
+{#
+{% if artist.profile_photo_url %}
+<a class = 'artist_list_a' href = '/artist?id={{ artist.user_id }}'><img class = 'artist_list_img' src="{{ artist.profile_photo_url }}"></img></a>
+
+{% else %}
+<a class = 'artist_list_a' href = '/artist?id={{ artist.user_id }}'><img class = 'artist_list_noimg' src="static/img/headphones-1.png"></img></a>
+
+{% endif %}
+#}
