@@ -33,10 +33,10 @@
     /* position: absolute; */
     z-index: 2;
     text-align: center;
+    text-shadow: 0 0 1px #21252a;
 }
 
-#hero-text a {
-
+/* #hero-text a {
     color: white;
     text-decoration: none;
     border: 1px white solid;
@@ -45,13 +45,39 @@
     display: block;
     background: #8080807d;
     margin-left: 90px;
-    padding: 10p;
+} */
+
+#hero-a-loggedout {
+    color: white;
+    text-decoration: none;
+    border: 1px white solid;
+    width: 110px;
+    height: 29px;
+    display: block;
+    background: #8080807d;
+    margin-left: 90px;
+}
+
+#hero-a-loggedin {
+    color: white;
+    text-decoration: none;
+    border: 1px white solid;
+    width: 110px;
+    height: 29px;
+    display: block;
+    background: #8080807d;
+    margin-left: 200px;
 }
 
 #index-hero {
     width: 100%;
     height: 100%;
     opacity: 0.5;
-    /* position: absolute; */
+    position: absolute;
     /* z-index: -1; */
+}
+
+
+#artist_name_index {
+    font-weight: 300;
 }

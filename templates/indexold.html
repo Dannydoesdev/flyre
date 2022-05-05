@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% if session.get('name') %}
+
+<h1>Welcome to Flyre <span id = 'artist_name_index'>{{ username }}</span></h1>
+<p> <a href="/complete_profile">Update your profile here here</a></p>
+<p><a href="/add_soundcloud">Add a track from Soundcloud</a></p><br>
+<a href="/artist_list">Artist List</a>
+
+{% else %}
+
+<h1>Flyre</h1>
+<p>Connecting local talent with local events</p>
+<a href="/artist_list">Artist List</a>
+
+{% endif %}
+
+<img id="index-hero" src="static/img/hero-test.jpg">
+
+
+<section>
+    <h2>Featured artists:</h2>
+    {% for result in results %}
+    <a class="arist_links" href="/artist?id={{ result[0] }}">{{ result[2] }}</a><br><br>
+    {% endfor %}
+</section>
+
+{% endblock %}
