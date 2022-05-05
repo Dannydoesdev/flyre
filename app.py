@@ -25,6 +25,8 @@ def index():
     # email = session.get('email')
     name = session.get('name')
     id = session.get('id')
+
+    print(results)
     
     return render_template('index.html', results=results, name=name, id=id, username=session.get('name'))
 # sql_fetch('SELECT * FROM food WHERE id = %s', [id])

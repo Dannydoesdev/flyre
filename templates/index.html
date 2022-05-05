@@ -35,9 +35,6 @@
         </div>
       </nav>
 
-        
-        
-      
 
       {% else %}
 
@@ -95,6 +92,67 @@
           </div>
       </div>
       {% endif %}
+      <div class="container-fluid bg-dark text-white">
+      <div class="row" id="index_featured_artists">
 
+      {% for result in results %}
+
+      <div class="col-sm-4">
+        
+        <div class="card border-light text-white bg-dark mb-3">
+          <a class="arist_links" href="/artist?id={{ result[0] }}">
+          <img class="index_featured_artists_img" src="{{ result[6] }}" class="card-img-top" alt="...">
+        </a>
+          <div class="card-header">{{ result[2] }}</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ result[2] }}</h5>
+            <p class="card-text">{{ result[4] }}</p>
+          </div>
+        
+        </div>
+      </div>
+      {% endfor %}
+
+      </div>
+      </div>
+
+      {#
+
+      <div class="row">
+        <div class="col-sm-4">
+      <div class="card border-light text-white bg-dark mb-3">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h5 class="card-title">Dark card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card border-light text-white bg-dark mb-3">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-header">Header</div>
+          <div class="card-body">
+            <h5 class="card-title">Dark card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+        </div>
+
+      <div class="col-sm-4">
+        <div class="card border-light text-white bg-dark mb-3">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-header">Header</div>
+          <div class="card-body">
+            <h5 class="card-title">Dark card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      #}
 </body>
 </html>

@@ -21,10 +21,12 @@
     height: 850px;
 
 }
+
 .section{
     min-height: 150px;
     background: #dbdfe5;
 }
+
 .section.bg-alt{
     background: #b4bac0;
 }
@@ -34,6 +36,11 @@
     z-index: 2;
     text-align: center;
     text-shadow: 0 0 1px #21252a;
+}
+
+.index_featured_artists_img {
+    opacity: 0.8; 
+    width: 100%;
 }
 
 /* #hero-text a {
