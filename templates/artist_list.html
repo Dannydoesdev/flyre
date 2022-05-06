@@ -1,6 +1,54 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+
+{#
+  {% if session.get('name') %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="/">Flyre</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="/artist?id={{ session.get('id') }}">Your Page</a>
+              <a class="nav-link" href="/complete_profile">Update Profile</a>
+              <a class="nav-link" href="/add_soundcloud">Add Tracks</a>
+              <a class="nav-link" href="/logout">Logout</a>
+              
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+      {% else %}
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="/">Flyre</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link" href="/register">Register</a>
+              <a class="nav-link" href="/login">Login</a>
+              <a class="nav-link" href="/artist_list">Artist List</a>
+              <a class="nav-link" href="/about">About</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+   
+      {% endif %}
+#}
+
 <div class="artist_list_all">
 
 {% for artist in artist_list_response %}
@@ -21,7 +69,6 @@
 </div>
     {% if artist.profile_photo_url %}
  <img class = 'artist_list_img' src="{{ artist.profile_photo_url }}"></img>
-
    {% else %}
 <img class = 'artist_list_noimg' src="static/img/headphones-1.png"></img>
 
@@ -33,10 +80,9 @@
 
 </div>
 
+
+
 {% endblock %}
-
-
-
 
 
 

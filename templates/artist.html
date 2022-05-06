@@ -4,11 +4,32 @@
 
 {% if current_user == 'yep' %}
 
+{#
 <h1>Welcome to your page</h1>
 <a href="/complete_profile">Complete profile</a><br>
 <a href="/add_genres">Add your genres</a><br>
 <a href="/add_soundcloud">Add a track from Soundcloud</a>
+</div>
+#}
 
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div id="artist-page-h" class="col-12 justify-content-center">
+
+<h1>Welcome to your page {{ results[2] }}</h1>
+</div>
+</div>
+<div class="row justify-content-center">
+        <div id="artist-page-buttons" class="col-12 justify-content-center">
+
+<button type="button" href="/complete_profile" class="btn btn-outline-success">Complete profile</button>
+<button type="button" href="/add_genres" class="btn btn-outline-light">Update your genres</button>
+<button type="button" href="/add_soundcloud" class="btn btn-outline-warning">Add a track from Soundcloud</button>
+
+
+</div>
+</div>
+</div>
 {% endif %}
 
 <section id = 'all_artist_info'>
@@ -89,14 +110,15 @@
 
     <h4>About {{ results[2] }}</h4>
 
-<a href="{{ results[7] }}">Soundcloud Link</a>
-<a href="{{ results[8] }}">Facebook Link</a>
+    {% if results[4] %}
+    <p>Bio: {{ results[4] }}</p>
+    {% else %}
+    <p>Bio: Not provided yet</p>
+    {% endif %}<br>
+<a href="{{ results[8] }}" class="btn btn-outline-warning"> {{ results[2] }}s Soundcloud</a><br>
+<a href="{{ results[9] }}" class="btn btn-outline-info"> {{ results[2] }}s Facebook</a><br><br>
 
-{% if results[4] %}
-<p>Bio: {{ results[4] }}</p>
-{% else %}
-<p>Bio: Not provided yet</p>
-{% endif %}
+
 
 <p>Email: {{ results[5] }}</p>
 

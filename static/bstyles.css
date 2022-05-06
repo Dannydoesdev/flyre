@@ -5,6 +5,11 @@
     min-height: 90px;
  
 }
+
+#navbar {
+    font-size: 2rem;
+}
+
 .footer{
     min-height: 60px;
 }
@@ -54,6 +59,19 @@
     margin-left: 90px;
 } */
 
+.card {
+    height: 100%; 
+  }
+
+#artist-page-h {
+    text-align: center;
+}
+
+#artist-page-buttons {
+    display: flex;
+    gap: 20px;
+}
+
 #hero-a-loggedout {
     color: white;
     text-decoration: none;
@@ -77,14 +95,19 @@
 }
 
 #index-hero {
-    width: 100%;
+    width: 98.5%;
     height: 100%;
     opacity: 0.5;
     position: absolute;
+    --bs-gutter-x: 0;
     /* z-index: -1; */
 }
 
 
 #artist_name_index {
     font-weight: 300;
+}
+
+#featured_artists_h {
+    text-align: center;
 }

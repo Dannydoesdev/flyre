@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Register for Flyre</h1>
+
+{#
 <div>
     <form action="/register_action" method="POST">
         Email: <input type="text" name="email" required><br><br>
@@ -9,5 +10,32 @@
         Name/artist name: <input type="text" name="name" required><br><br>
         <input type="submit" value="Submit">
     </form>
+</div>
+#}
+<div class="container-fluid ms-1 bg-dark text-white">
+<h1>Register for Flyre</h1><br>
+<form action="/register_action" method="POST">
+   
+    <div class="col-md-5">
+    <label for="email" class="form-label">Enter your E-mail</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="john@example.com" required>
+  </div><br>
+  <div class="col-md-5">
+    <label for="Password" class="form-label">Choose a password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+    </div><br>
+    </div>
+    <div class="col-md-5">
+        <label for="name" class="form-label">Enter your name or artist name:</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Tiestots" required>
+    
+      <div id="nameinputhelp" class="form-text">Let us know what to call you - this will also be your display name.
+      </div>
+    </div><br>
+        <input type="submit" value="Submit">
+
+
+</form>
 </div>
 {% endblock %}

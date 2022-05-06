@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+{#
 <h1>Log in to Flyre</h1>
 <div>
     <form action="/login_action" method="POST">
@@ -9,4 +10,24 @@
         <input type="submit" value="Log in">
     </form>
 </div>
+#}
+
+
+<div class="container-fluid ms-1 bg-dark text-white">
+    <h1>Log in to Flyre</h1><br>
+    <form action="/login_action" method="POST">
+       
+        <div class="col-md-5">
+        <label for="email" class="form-label">Enter your E-mail</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="john@example.com" required>
+      </div><br>
+      <div class="col-md-5">
+        <label for="password" class="form-label">Enter your password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder=""><br>
+        </div>
+            <input type="submit" value="Log in">
+    
+    </form>
+    </div>
+
 {% endblock %}
