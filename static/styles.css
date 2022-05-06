@@ -167,6 +167,10 @@ iframe {
     position: relative;
 }
 
+.artist_list_inner:hover {
+    color: #1f1c1c;
+}
+
 .artist_list_name_genre {
     padding-left: 10px;
     display: flex;
