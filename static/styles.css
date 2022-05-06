@@ -18,6 +18,10 @@
     font-size: 16pt;
 }
 
+.artist_background_color {
+    background-color: #0f355c66;
+}
+
 #artist_name_index {
     font-weight: 300;
 }
@@ -39,6 +43,10 @@ iframe {
     color: #000000;
 }
 
+.artist_music_bio {
+    margin-top: 40px;
+}
+
 
 #all_artist_info{
     display: grid;
@@ -56,7 +64,7 @@ iframe {
     justify-content: start;
     gap: 115px;
     align-items: center;
-    margin: 10px 100px;
+    /* margin: 10px 100px; */
     text-align: left;
     color: white;
     font-weight: 900;
@@ -65,9 +73,11 @@ iframe {
     /* position: absolute; */
 }
 
-#artist_profile_photo{
+#artist_profile_photo {
+    z-index: 2;
     width: 13%;
-    border: 1px solid white;
+    /* border: 1px solid #c13c32; */
+    /* border: 1px solid white; */
     border-radius: 50%;
     background: black;
     margin-left: 50px;
@@ -75,9 +85,11 @@ iframe {
 
 }
 
-#artist_profile_nophoto{
+#artist_profile_nophoto {
+    z-index: 2;
     width: 13%;
-    border: 1px solid white;
+    /* border: 1px solid #c13c32; */
+    /* border: 1px solid white; */
     border-radius: 50%;
     background: white;
     margin-left: 50px;
@@ -97,7 +109,7 @@ iframe {
 }
 
 #artist_background_photo {
-    z-index: -1;
+    z-index: 0;
     opacity: 0.3;
     position: absolute;
     width: 90%;
@@ -113,7 +125,7 @@ iframe {
 
 
 #artist_background_nophoto {
-    z-index: -1;
+    z-index: 0;
     opacity: 0.3;
     position: absolute;
     width: 90%;
@@ -185,7 +197,12 @@ iframe {
     align-items: center;
 }    
 
+#artist_header_info {
+    z-index: 2;
+}
+
 .artist_list_genres {
+
     display: flex;
     gap: 10px;
     font-size: 15px;

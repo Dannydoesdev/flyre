@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{#
 <h1>Complete your profile</h1>
 <div>
     <form action="/complete_profile_action" method="POST">
@@ -15,6 +16,61 @@
 
     </form>
 </div>
+#}
+
+<div class="container-fluid ms-1 bg-dark text-white">
+    <h1>Complete your profile</h1><br>
+    <form action="/complete_profile_action" method="POST">
+       
+        <div class="col-md-5">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" class="form-control" id="location" name="location" placeholder="Sydney" required>
+      </div><br>
+      
+      {#
+      <div class="col-md-5">
+        <label for="bio" class="form-label">Bio</label>
+        <textarea type="text" class="form-control" id="bio" name="bio" placeholder="Tell us about yourself" rows="3" required></textarea>
+      </div><br>
+#}
+
+      <div class="col-md-5">
+        <label for="bio" class="form-label">Bio</label>
+        <input type="text" class="form-control" id="bio" name="bio" placeholder="Tell us about yourself" rows="3" required>
+      </div><br>
+
+      <div class="col-md-5">
+        <label for="profile_photo_url" class="form-label">URL of profile photo</label>
+        <input type="text" class="form-control" id="profile_photo_url" name="profile_photo_url" placeholder="www.pixabay.com/bestdjpic.jpg" required>
+      </div><br>
+    
+      {#
+      <div class="col-md-5">
+        <label for="profile_photo_upload" class="form-label">Upload Profile Photo</label>
+        <input class="form-control" type="file" id="profile_photo_upload">
+      </div><br>
+    #}
+
+      <div class="col-md-5">
+        <label for="soundcloud_url" class="form-label">Soundcloud address</label>
+        <input type="text" class="form-control" id="soundcloud_url" name="soundcloud_url" placeholder="www.soundcloud.com/djplaceholder" required>
+      </div><br>
+
+      <div class="col-md-5">
+        <label for="facebook_url" class="form-label">Facebook address</label>
+        <input type="text" class="form-control" id="facebook_url" name="facebook_url" placeholder="www.facebook.com/mark_zuck" required>
+      </div><br>
+
+      <div class="col-md-5">
+        <label for="user_type" class="form-label">Artist</label>
+        <input type="text" class="form-control" id="user_type" name="user_type" value="artist" disabled>
+      </div><br>
+
+      
+     <input type="submit" value="Submit">
+      
+    </form>
+    </div>
 
 
 {% endblock %}
