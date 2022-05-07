@@ -4,37 +4,24 @@
 
 {% if current_user == 'yep' %}
 
-{#
-<h1>Welcome to your page</h1>
-<a href="/complete_profile">Complete profile</a><br>
-<a href="/add_genres">Add your genres</a><br>
-<a href="/add_soundcloud">Add a track from Soundcloud</a>
-</div>
-#}
 
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div id="artist-page-h" class="col-12 justify-content-center">
 
-<h1>Welcome to your page {{ results[2] }}</h1>
-</div>
-</div>
-<div class="row justify-content-center">
+            <h1>Welcome to your page {{ results[2] }}</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
         <div id="artist-page-buttons" class="col-12 justify-content-center">
 
-            {#
-<button type="button" href="/complete_profile" class="btn btn-outline-success">Complete profile</button>
-<button type="button" href="/add_genres" class="btn btn-outline-light">Update your genres</button>
-<button type="button" href="/add_soundcloud" class="btn btn-outline-warning">Add a track from Soundcloud</button>
-#}
-
-<a href="/complete_profile" class="btn btn-outline-success">Complete profile</a><br>
-<a href="/add_genres" class="btn btn-outline-light">Update your genres</a><br><br>
-<a href="/add_soundcloud" class="btn btn-outline-warning">Add a track from Soundcloud</a><br><br>
+            <a href="/complete_profile" class="btn btn-outline-success">Complete profile</a><br>
+            <a href="/add_genres" class="btn btn-outline-light">Update your genres</a><br><br>
+            <a href="/add_soundcloud" class="btn btn-outline-warning">Add a track from Soundcloud</a><br><br>
 
 
-</div>
-</div>
+        </div>
+    </div>
 </div>
 {% endif %}
 
@@ -42,116 +29,81 @@
 <div class="container-fluid bg-dark text-white all_artist_info">
     <div class="row artist_background_color">
         <div class="col-12">
-<!-- <section id = 'all_artist_info'> -->
 
-<section id = 'artist_header'>
+            <section id='artist_header'>
+                {% if results[6] %}
+                <img id="artist_profile_photo" src="{{ results[6] }}">
+                {% else %}
+                <img id="artist_profile_nophoto" src="../static/img/placeholder-1.jpg">
 
-    <!-- {% if results[7] %}
+                {% endif %}
 
-<img id="artist_background_photo" src="{{ results[7] }}">
-{% else %}
-<img id="artist_background_nophoto" src="https://cdn.pixabay.com/photo/2015/08/28/11/27/space-911785_1280.jpg">
+                <div id="artist_header_info">
 
-{% endif %} -->
+                    <h1>Artist name: {{ results[2] }}</h1>
 
-
-{% if results[6] %}
-<img id="artist_profile_photo" src="{{ results[6] }}">
-{% else %}
-<img id="artist_profile_nophoto" src="../static/img/placeholder-1.jpg">
-
-{% endif %}
-
-
-<div id="artist_header_info">
-
-    <h1>Artist name: {{ results[2] }}</h1>
-    
-    {% if results[3] %}
-    <p>Location: {{ results[3] }}</p>
-    {% else %}
-    <p>Location: Not provided yet</p>
-    {% endif %}
+                    {% if results[3] %}
+                    <p>Location: {{ results[3] }}</p>
+                    {% else %}
+                    <p>Location: Not provided yet</p>
+                    {% endif %}
 
 
-    {% if genres %}
+                    {% if genres %}
 
-<div class="genre_div">
-<h2>Genres:</h2>
-{% for genre in genres %}
-<h3 class="genre_list">{{ genre[0] }}</h3>
-{% endfor %}
-</div>
+                    <div class="genre_div">
+                        <h2>Genres:</h2>
+                        {% for genre in genres %}
+                        <h3 class="genre_list">{{ genre[0] }}</h3>
+                        {% endfor %}
+                    </div>
 
-{% endif %}
+                    {% endif %}
 
-    
-</section>
-</div>
-</div>
+            </section>
+        </div>
+    </div>
 </div>
 
 
 <div class="container-fluid bg-dark text-white artist_music_bio">
     <div class="row">
         <div class="col-8 artist_music">
-<!-- <section id="artist_music"> -->
 
-    <h4>Artist music</h4>
+            <h4>Artist music</h4>
 
-    {#
-    {% if iframe %}
-    
-    {{ iframe|safe }}<br><br>
-    
-    {% endif %}
-    
-    #}
-    
-    {% if iframe_list %}
-    
-    {% for item in iframe_list %}
-    {{ item|safe }}<br><br>
-    {% endfor %}
-    
-    {% else %}
+            {% if iframe_list %}
 
-    <p>{{ results[2] }} hasn't uploaded any tracks yet</p>
+            {% for item in iframe_list %}
+            {{ item|safe }}<br><br>
+            {% endfor %}
 
-    {% endif %}
-    
-    <!-- </section> -->
+            {% else %}
+
+            <p>{{ results[2] }} hasn't uploaded any tracks yet</p>
+
+            {% endif %}
 
         </div>
 
 
-<div class="col-4 artist_music artist_about">
-<!-- <aside id = 'artist_about'> -->
+        <div class="col-4 artist_music artist_about">
 
-    <h4>About {{ results[2] }}</h4>
+            <h4>About {{ results[2] }}</h4>
 
-    {% if results[4] %}
-    <p>Bio: {{ results[4] }}</p>
-    {% else %}
-    <p>Bio: Not provided yet</p>
-    {% endif %}<br>
-<a href="{{ results[8] }}" class="btn btn-outline-warning"> {{ results[2] }}s Soundcloud</a><br>
-<a href="{{ results[9] }}" class="btn btn-outline-info"> {{ results[2] }}s Facebook</a><br><br>
+            {% if results[4] %}
+            <p>Bio: {{ results[4] }}</p>
+            {% else %}
+            <p>Bio: Not provided yet</p>
+            {% endif %}<br>
+            <a href="{{ results[8] }}" class="btn btn-outline-warning"> {{ results[2] }}s Soundcloud</a><br>
+            <a href="{{ results[9] }}" class="btn btn-outline-info"> {{ results[2] }}s Facebook</a><br><br>
 
+            <p>Email: {{ results[5] }}</p>
 
-
-<p>Email: {{ results[5] }}</p>
-
-<!-- </aside> -->
-
-</div>
-</div>
+        </div>
+    </div>
 </div>
 
-{# <iframe id="track" width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/249593158&amp;color=000000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false"></iframe> #}
-
-
-
-</section>
 
 {% endblock %}

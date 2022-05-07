@@ -112,6 +112,9 @@ def artist():
     return render_template('artist.html', results=results, genres=genres, current_user=current_user, iframe=iframe, iframe_list=iframe_list) 
 
 
+@app.route('/error')
+def error():
+    return render_template('error.html', name=session.get('name'))
 
 
 @app.route('/login')
@@ -144,7 +147,8 @@ def login_action():
                 session['email'] = email
                 session['name'] = name
                 session['id'] = id
-
+            else:
+                return redirect('/error')
         else:
             print('email not found')
    
@@ -261,7 +265,6 @@ def add_genres_action():
     genre_check = sql_fetch('SELECT genre_name FROM genres WHERE user_id = %s', [id])
     existing_genre_list = [genre_check['genre_name'] for genre_check in genre_check]
 
-
     for genre in chosen_genres:
         if genre not in existing_genre_list:
             print('genre not found')
@@ -269,10 +272,7 @@ def add_genres_action():
         else:
             print('genre found')
 
-
     conn.commit()
-
-
     conn.close()
  
     return redirect(f'/artist?id={id}')
