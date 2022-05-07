@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+{#
 <h1>Add a track from Soundcloud:</h1>
 <div>
     <form action="/add_soundcloud_action" method="POST">
@@ -8,4 +9,18 @@
         <input type="submit" value="Add track">
     </form>
 </div>
+#}
+
+<div class="container-fluid ms-1 bg-dark text-white">
+    <h1>Add a track from Soundcloud:</h1><br>
+    <form action="/complete_profile_action" method="POST">
+        <div class="col-md-5">
+            <label for="track_url" class="form-label">Soundcloud track/set URL</label>
+            <input type="text" class="form-control" id="track_url" name="track_url" placeholder="https://soundcloud.com/suzuki-growhouse/lcd-warhols" required>
+            <div id="nameinputhelp" class="form-text">Copy a link to one of your tracks or sets on Soundcloud - you can paste the URL directly in
+            </div>
+        </div><br>
+            <input type="submit" class="btn btn-lg btn-outline-warning" value="Add track">
+        </form>
+    </div>
 {% endblock %}

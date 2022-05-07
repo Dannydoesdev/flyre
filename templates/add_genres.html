@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{#}
 <h1>Select genres you play</h1>
 <div>
     <form action="/add_genres_action" method="POST">
@@ -9,8 +10,47 @@
         <label for="genres"><input type="checkbox" name="genres" value="Disco">Disco</label><br>
         <label for="genres"><input type="checkbox" name="genres" value="DnB">DnB</label><br>  
         <label for="genres"><input type="checkbox" name="genres" value="House">House</label><br>
-        <input type="submit" value="Submit">
+
+        <input type="submit" class="btn btn-lg btn-outline-light" value="Submit">
     </form>
 </div>
+#}
 
+
+<div class="container-fluid ms-1 bg-dark text-white">
+    <h1>Select genres you play</h1><br>
+    <form action="/add_genres_action" method="POST">
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" name="genres"  value="Techno" id="techno">
+    <label class="form-check-label" for="techno">
+     Techno
+    </label>
+  </div>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="genres"  value="Disco" id="disco">
+    <label class="form-check-label" for="disco">
+    Disco
+    </label>
+  </div>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="genres"  value="DnB" id="dnb">
+    <label class="form-check-label" for="dnb">
+    DnB
+    </label>
+  </div>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="genres"  value="House" id="house">
+    <label class="form-check-label" for="house">
+    House
+    </label>
+  </div><br>
+
+  <input type="submit" class="btn btn-lg btn-outline-light" value="Submit">
+</form>
+</div>
+
+  
 {% endblock %}
