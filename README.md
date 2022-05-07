@@ -248,6 +248,46 @@ def get_track(track_url):
 
 
 ```
+## Adding genres page:
+
+#### Some checks to make sure existing genres aren't duplicated when using checkboxes
+#### Using a list conditional to pull all the existing genres from the table
+#### Using a form.getlist to pull all values from the user submission
+#### Looping over the .getlist return to make sure each isn't in the table, then insterting
+
+```python
+
+
+@app.route('/add_genres')
+def add_genres():
+    return render_template('add_genres.html', name=session.get('name'))
+
+
+@app.route('/add_genres_action', methods=['POST'])
+def add_genres_action():
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    chosen_genres = request.form.getlist('genres')
+    id = session.get('id')
+    genre_check = sql_fetch('SELECT genre_name FROM genres WHERE user_id = %s', [id])
+    existing_genre_list = [genre_check['genre_name'] for genre_check in genre_check]
+
+    for genre in chosen_genres:
+        if genre not in existing_genre_list:
+            print('genre not found')
+            sql_write('INSERT INTO genres (user_id, genre_name) VALUES (%s, %s)', (id, genre))
+        else:
+            print('genre found')
+
+    conn.commit()
+    conn.close()
+ 
+    return redirect(f'/artist?id={id}')
+
+
+
+```
+
 
 ### Main Challenges:
 
