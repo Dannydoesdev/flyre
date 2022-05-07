@@ -26,10 +26,11 @@ As a party/club/festival organiser I want to be able to easily search out DJs, f
 - Artist signup
 - Artist login
 - Featured artists
-- Copy Soundcloud link to present on page
+- Copy Soundcloud link to return iframe on artist page
 - Bootstrap layout
 - Artist list page
 - Logic to detect user logged in/on their own page
+
 
 
 ## Code:
@@ -46,9 +47,13 @@ Other stuff -
 - Import and update bootstrap on all pages
 - Send through iframes to the HTML and allow them to show up
 
-### Artist page:
-#### Check if id in args matches id in cookie to show logged-in functionality
-#### Check if the user has track iframes, create a list to use in Jinja
+
+## Artist page:
+#### Check if id in args matches id in cookie to show user-specific artist page functionality
+
+#### Create list of the track URLs in the tracks table, use get_track fn to return the iframes from API
+#### Append each iframe HTML to list and send through template to parse in jinja
+
 
 ```python
 
@@ -104,10 +109,44 @@ def artist():
 
 ```
 
+### Add Soundcloud page:
+#### Send through to action page where get_track fn is called
+#### If not null (calculated in get_track) update the tracks table with the url
+
+```python
+
+@app.route('/add_soundcloud')
+def add_soundcloud():
+    return render_template('add_soundcloud.html', name=session.get('name'))
+
+
+@app.route('/add_soundcloud_action', methods=['POST'])
+def add_soundcloud_action():
+    id=session.get('id')
+    track_url = request.form.get('track_url')
+    sc_response = get_track(track_url)
+    if sc_response:
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+        cur.execute('INSERT INTO tracks (track_url, user_id) VALUES (%s, %s)', (track_url, id))
+        conn.commit()
+
+        cur.execute('SELECT track_url from tracks where user_id = %s', [id])
+        response = cur.fetchone()
+        track_url = response[0]
+        conn.close()
+
+    else:
+
+        print('track not found!')
+
+    return redirect(f'/artist?id={id}')
+
+```
+
 ### Soundcloud API fn:
 #### When called - send the parameters to the embed API which returns an iframe (or error if not)
 #### Function then returns that iframe response
-
 
 ```python
 
@@ -164,7 +203,77 @@ def get_track(track_url):
 ```
 
 
-###OLD README:
+## Artist list page:
+
+#### Send a dictionary - make it much more readable in the jinja templates
+#### Using 2 different tables - able to calculate in the jinja that they user_ids match (as they reference eachother)
+#### Allows the genres to append to the right user
+
+```python
+
+<div class="artist_list_all">
+
+  {% for artist in artist_list_response %}
+  <div class='artist_list_div'>
+    <a class='artist_list_inner' href='/artist?id={{ artist.user_id }}'>
+      <div class="artist_list_name_genre">
+        <h4>{{ artist.name }}</h4>
+        <div class='artist_list_genres'>
+
+          {# Append genres of artist if the genres table matches users table user_id #}
+
+          {% for genre_list in genre_list_response %}
+          {% if genre_list.user_id == artist.user_id %}
+          <p>{{ genre_list.genre_name }}</p>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% if artist.profile_photo_url %}
+      <img class='artist_list_img' src="{{ artist.profile_photo_url }}"></img>
+      {% else %}
+      <img class='artist_list_noimg' src="../static/img/placeholder-1.jpg"></img>
+
+      {% endif %}
+
+    </a>
+  </div>
+  {% endfor %}
+
+</div>
+
+{% endblock %}
+
+</div>
+
+
+```
+
+### Main Challenges:
+
+
+## Things I'd like to do in future:
+
+- More mobile friendly
+- Allow artists to add past events & locations played
+- Review functionality
+- instagram/FB/Youtube API functionality for photos/events/videos
+- Search functionality
+- Cloud image upload
+- Improve onboarding flow
+- Forgot pwd
+
+
+### Known bugs/issues
+
+- User needs to update every field in 'profile update screen', should be optional which gets updated
+- Currently no limitation on character count (move to VARCHAR(##) columns in schema)
+- Not any great error handling for user (existing email etc)
+
+
+
+
+### OLD README:
 
 
 ## Concept (unless I pivot):
