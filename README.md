@@ -11,14 +11,12 @@
 
 You can find me at [Linkedin](https://www.linkedin.com/in/danieltmcgee/)
 
-### General Assembly Project 2
-
 
 ### User stories:
 
-As a DJ I want to promote myself to party organisers so that they can find me, hear my music and book me
+As a DJ I want to promote myself to party organisers so that they can find me, hear my music and get in contact with me
 
-As a party/club/festival organiser I want to be able to easily search out DJs, find their music, genre, location, prices etc and contact them so that I can run a successful event
+As a party/club/festival organiser I want to be able to easily find an search local artists to play events
 
 
 ### Features:
@@ -43,9 +41,9 @@ As a party/club/festival organiser I want to be able to easily search out DJs, f
 (all these reference users(user_id))
 
 Other stuff - 
-- Using dictionaries to go through to the Jinja to make it readable
-- Import and update bootstrap on all pages
-- Send through iframes to the HTML and allow them to show up
+- Passing dictionaries to Jinja to make code more readable
+- Import and updated bootstrap on all pages
+- Send iframes from SQL to an API through to HTML and display on page
 
 
 ## Artist page:
@@ -145,7 +143,7 @@ def add_soundcloud_action():
 ```
 
 ### Soundcloud API fn:
-#### When called - send the parameters to the embed API which returns an iframe (or error if not)
+#### When called - send the parameters to the embed API which returns an iframe (or null if not)
 #### Function then returns that iframe response
 
 ```python
@@ -291,6 +289,9 @@ def add_genres_action():
 
 ### Main Challenges:
 
+- Soundcloud no longer creates API keys for their main API, however I was able to use oembed to return code I could use as an iframe on the site
+- Pivoting to bootstrap for the desired CSS layouts half way through, meant a lot of re-factoring but turned out well
+- Getting consistent pleasant design/UX across all the pages was a lot of work, I'm glad with how it looks but ended up with less time for more features
 
 ## Things I'd like to do in future:
 
@@ -306,68 +307,8 @@ def add_genres_action():
 
 ### Known bugs/issues
 
-- User needs to update every field in 'profile update screen', should be optional which gets updated
+- User needs to update every field in 'profile update screen', should be optional to fill out the ones you want
 - Currently no limitation on character count (move to VARCHAR(##) columns in schema)
 - Not any great error handling for user (existing email etc)
+         - Note: Created error page for incorrect pwds
 
-
-
-
-### OLD README:
-
-
-## Concept (unless I pivot):
-
-Connect DJs(& artists) with clubs/parties/promoters etc
-
-
-### Optional extra concept:
-(DJs slash artists?)
-
-To define ‘artists’ scope (bands/performers etc) - focus on DJs for now?
-
-
-### Features:
-
-Login for DJs
-
-Bio, links, picture, contact info, location
-
-Search page
-
-- Search filters:
-- Genre
-- Location
-- Price
-- Reviews
-
-### Optional freatures:
-
-Login for organisers
-
-Reviews (recommendations?)
-
-Prices
-
-Host music on site
-
-
-### Technicals:
-
-Homepage when not logged in
-
-Homepage when logged in
-
-Individual pages for DJs
-
-Database for users (DJs)
-
-Database for bios, profile picture, links etc
-
-### Optional technicals:
-
-Individual pages for organisers
-
-Database for users (organisers)
-
-Dynamic database for reviews
