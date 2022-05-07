@@ -2,24 +2,24 @@
 
 ### Connecting local talent to local events
 
-### Live site
+## Live site
 
 ### [Find the live site by clicking here](https://morning-atoll-11830.herokuapp.com/)
 
 
-### Contact
+## Contact
 
 You can find me at [Linkedin](https://www.linkedin.com/in/danieltmcgee/)
 
 
-### User stories:
+## User stories:
 
 As a DJ I want to promote myself to party organisers so that they can find me, hear my music and get in contact with me
 
 As a party/club/festival organiser I want to be able to easily find an search local artists to play events
 
 
-### Features:
+## Features:
 
 - Artist signup
 - Artist login
@@ -107,7 +107,7 @@ def artist():
 
 ```
 
-### Add Soundcloud page:
+## Add Soundcloud page:
 #### Send through to action page where get_track fn is called
 #### If not null (calculated in get_track) update the tracks table with the url
 
@@ -142,7 +142,7 @@ def add_soundcloud_action():
 
 ```
 
-### Soundcloud API fn:
+## Soundcloud API fn:
 #### When called - send the parameters to the embed API which returns an iframe (or null if not)
 #### Function then returns that iframe response
 
@@ -174,7 +174,7 @@ def get_track(track_url):
 
 ```
 
-### Display Soundcloud iframes on page
+## Display Soundcloud iframes on page:
 #### Loop through iframe list that is sent and display with |safe (as Flask will filter it out otherwise)
 #### Allows for multiple tracks to be shown on page
 
@@ -287,7 +287,7 @@ def add_genres_action():
 ```
 
 
-### Main Challenges:
+## Main Challenges:
 
 - Soundcloud no longer creates API keys for their main API, however I was able to use oembed to return code I could use as an iframe on the site
 - Pivoting to bootstrap for the desired CSS layouts half way through, meant a lot of re-factoring but turned out well
@@ -305,7 +305,7 @@ def add_genres_action():
 - Forgot pwd
 
 
-### Known bugs/issues
+## Known bugs/issues
 
 - User needs to update every field in 'profile update screen', should be optional to fill out the ones you want
 - Currently no limitation on character count (move to VARCHAR(##) columns in schema)
