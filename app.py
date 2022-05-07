@@ -21,15 +21,13 @@ def index():
     cur = conn.cursor()
     cur.execute('SELECT * from USERS')
     results = cur.fetchall()
-    # print(results)
-    # email = session.get('email')
     name = session.get('name')
     id = session.get('id')
 
     print(results)
     
     return render_template('index.html', results=results, name=name, id=id, username=session.get('name'))
-# sql_fetch('SELECT * FROM food WHERE id = %s', [id])
+
 
 @app.route('/artist_list')
 def artist_list():
@@ -44,17 +42,12 @@ def artist_list():
 def artist():
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
-    # if session.get('id'):
-    #     id = session.get('id')
-    # else:
     id = request.args.get('id')
     cookie = session.get('id')
     arg = request.args.get('id')
 
     if str(cookie) == arg:
         current_user = True
-
-    # iframe = get_track('https://soundcloud.com/suzuki-growhouse/lcd-warhols')
 
     cur.execute('SELECT track_url from tracks where user_id = %s', [id])
     response = cur.fetchall()
@@ -67,17 +60,9 @@ def artist():
         for one_response in response:
             print(one_response[0])
             track_response_list.append(one_response[0])
-        # for index, track_url in enumerate(response):
-        #     print(index, track_url[0])
-        #     track_var = f'track{index}'
-        #     track_var = track_url[0]
 
     else:
         track_url = ''
-    # print('track0')
-    # print(track0)
-
-    print(track_response_list)
 
     iframe_list = []
 
@@ -93,23 +78,6 @@ def artist():
     for item in iframe_list:
         print(item)
 
-    # print(iframe)
-
-    # iframe_jsonify = jsonify(iframe)
-    # print(type(cookie))
-    # print(type(arg))
-    # argint = int(arg)
-    # print(argint)
-    # print(type(argint))
-    # if cookie == int(arg):
-    #     current_user = session.get('name')
-    # else:
-    #     current_user = False
-    #     print('not current user')
-    # cookie = session.get('id')
-    # arg = request.args.get('id')
-    # print(cookie)
-    # print(arg)
 
     if str(session.get('id')) == request.args.get('id'):
         current_user = 'yep'
@@ -133,15 +101,10 @@ def artist():
     bio = results[4]
     email = results[5]
 
-    print(results_one)
-
-    print(f'bio{bio}')
-
 
     cur.execute('SELECT genre_name FROM genres WHERE user_id = %s', [id])
     genres = cur.fetchall()
-    # print(genre_response)
-    # genres = genre_response[0]
+
     print(genres)
     for genre in genres:
         print(genre)
@@ -224,7 +187,7 @@ def register_action():
         session['id'] = id
         conn.close()
  
-    return redirect('/')
+    return redirect(f'/artist?id={id}')
 
 @app.route('/register')
 def register():
@@ -255,7 +218,7 @@ def add_soundcloud_action():
 
         print('track not found!')
 
-    return redirect('/')
+    return redirect(f'/artist?id={id}')
 
 
 @app.route('/add_soundcloud')
@@ -272,23 +235,17 @@ def complete_profile_action():
     soundcloud_url = request.form.get('soundcloud_url')
     facebook_url = request.form.get('facebook_url')
     user_type = request.form.get('user_type')
-    # cur.execute('SELECT * from users WHERE email = %s', [email])
-    # email_check = cur.fetchall()
+
     id = session.get('id')
 
     cur.execute('UPDATE users SET(location, bio, profile_photo_url, soundcloud_url, facebook_url, user_type) = (%s, %s, %s, %s, %s, %s) WHERE user_id = %s', (location, bio, profile_photo_url, soundcloud_url, facebook_url, user_type, id))
 
-    # session['name'] = name
-    # session['email'] = email
     
     conn.commit()
 
-    # cur.execute('SELECT user_id from users where email = %s', [email])
-    # response = cur.fetchone()
-    # print('testing result')
     conn.close()
  
-    return redirect('/')
+    return redirect(f'/artist?id={id}')
 
 @app.route('/complete_profile')
 def complete_profile():
@@ -300,27 +257,10 @@ def add_genres_action():
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
     chosen_genres = request.form.getlist('genres')
-    # bio = request.form.get('bio')
-    # profile_photo_url = request.form.get('profile_photo_url')
-    # soundcloud_url = request.form.get('soundcloud_url')
-    # facebook_url = request.form.get('facebook_url')
-    # user_type = request.form.get('user_type')
-    # cur.execute('SELECT * from users WHERE email = %s', [email])
-    # email_check = cur.fetchall()
     id = session.get('id')
-
-    # print(checkboxresult)
-
-    # cur.execute('UPDATE users SET(location, bio, profile_photo_url, soundcloud_url, facebook_url, user_type) = (%s, %s, %s, %s, %s, %s) WHERE user_id = %s', (location, bio, profile_photo_url, soundcloud_url, facebook_url, user_type, id))
-
-    # session['name'] = name
-    # session['email'] = email
-    
     genre_check = sql_fetch('SELECT genre_name FROM genres WHERE user_id = %s', [id])
     existing_genre_list = [genre_check['genre_name'] for genre_check in genre_check]
 
-    # for genre in genre_check:
-    #     print(genre['genre_name'])
 
     for genre in chosen_genres:
         if genre not in existing_genre_list:
@@ -332,9 +272,7 @@ def add_genres_action():
 
     conn.commit()
 
-    # cur.execute('SELECT user_id from users where email = %s', [email])
-    # response = cur.fetchone()
-    # print('testing result')
+
     conn.close()
  
     return redirect(f'/artist?id={id}')
