@@ -12,15 +12,15 @@
 You can find me at [Linkedin](https://www.linkedin.com/in/danieltmcgee/)
 
 
-## Languages used:
+## Languages/libraries used:
 
-Python
-Flask
-Jinja
-HTML
-CSS
-Bootstrap
-Javascript
+- Python
+- Flask
+- Jinja
+- HTML
+- CSS
+- Bootstrap
+- Javascript
 
 
 ## Process:
@@ -33,7 +33,7 @@ Scope - Used MOSCOW to decide on priority features to have a solid working MVP
 
 Code - Spent most of my time getting the infrastructure working (API returns, flask sending correct info to templates etc) before moving on to design
 
-Design - Researched similar sites (especially Soundcloud, where artists would be familiar), [used Figma to draw up wireframes] (https://www.figma.com/file/K4HYl8z5A7Ajd0Elbadnva/Flyre?node-id=24%3A2075)
+Design - Researched similar sites (especially Soundcloud, where artists would be familiar), [used Figma to draw up wireframes](https://www.figma.com/file/K4HYl8z5A7Ajd0Elbadnva/Flyre?node-id=24%3A2075)
 
 Implementing designs - Decided to learn and apply bootstrap after running into limitations with what I wanted to achieve with a consistent look and feel in CSS. Used custom styling within bootstrap to get the look I wanted
 
