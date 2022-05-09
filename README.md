@@ -12,6 +12,32 @@
 You can find me at [Linkedin](https://www.linkedin.com/in/danieltmcgee/)
 
 
+## Languages used:
+
+Python
+Flask
+Jinja
+HTML
+CSS
+Bootstrap
+Javascript
+
+
+## Process:
+
+Ideation - Started with multiple ideas and decided to go with a friends suggestion, based on the 'fyre' app that the 'fyre' festival was promoting. Connect DJs with organisers
+
+Research - Spoke with local artists and event organisers, sent out a [survey to relevant user types](https://forms.gle/Ff2J9qaimaYMkKpv7)
+
+Scope - Used MOSCOW to decide on priority features to have a solid working MVP
+
+Code - Spent most of my time getting the infrastructure working (API returns, flask sending correct info to templates etc) before moving on to design
+
+Design - Researched similar sites (especially Soundcloud, where artists would be familiar), [used Figma to draw up wireframes] (https://www.figma.com/file/K4HYl8z5A7Ajd0Elbadnva/Flyre?node-id=24%3A2075)
+
+Implementing designs - Decided to learn and apply bootstrap after running into limitations with what I wanted to achieve with a consistent look and feel in CSS. Used custom styling within bootstrap to get the look I wanted
+
+
 ## User stories:
 
 As a DJ I want to promote myself to party organisers so that they can find me, hear my music and get in contact with me
@@ -28,7 +54,6 @@ As a party/club/festival organiser I want to be able to easily find an search lo
 - Bootstrap layout
 - Artist list page
 - Logic to detect user logged in/on their own page
-
 
 
 ## Code:
